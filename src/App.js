@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ProjectDashboard from './components/ProjectDashboard'; // Assuming this is your default dashboard view
+import BudgetStatus from './components/BudgetStatus'; // Assuming this shows budget info
+import ProjectTable from './components/ProjectTable'; // Assuming this shows the project table
+import SideMenu from './components/SideMenu'; // Side menu to control navigation
 
 function App() {
+  const [activeView, setActiveView] = useState('Dashboard'); // Track active view
+
+  // Function to render the content based on the active menu item
+  const renderContent = () => {
+    switch (activeView) {
+      case 'Dashboard':
+        return <ProjectDashboard />;
+      case 'BudgetStatus':
+        return <BudgetStatus />;
+      case 'Projects':
+        return <ProjectTable />;
+      default:
+        return <ProjectDashboard />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ display: 'flex' }}>
+      <SideMenu handleMenuClick={setActiveView} /> 
+      <div style={{ flex: 1, padding: '20px' }}>
+        {renderContent()} 
+      </div>
     </div>
   );
 }
