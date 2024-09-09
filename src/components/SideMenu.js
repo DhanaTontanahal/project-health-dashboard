@@ -35,8 +35,8 @@ const SideMenu = ({ handleMenuClick }) => {
       <MenuItem onClick={() => handleMenuClick('Dashboard')}>
         <FaTachometerAlt /> Dashboard
       </MenuItem>
-      <MenuItem onClick={() => handleMenuClick('BudgetStatus')}>
-        <FaTasks /> Budget Status
+      <MenuItem onClick={() => handleMenuClick('Insights')}>
+        <FaTasks /> Advanced Insights
       </MenuItem>
       <MenuItem onClick={() => handleMenuClick('Projects')}>
         <FaChartLine /> Projects

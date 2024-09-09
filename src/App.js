@@ -4,6 +4,7 @@ import ProjectDashboard from './components/ProjectDashboard'; // Assuming this i
 import BudgetStatus from './components/BudgetStatus'; // Assuming this shows budget info
 import ProjectTable from './components/ProjectTable'; // Assuming this shows the project table
 import SideMenu from './components/SideMenu'; // Side menu to control navigation
+import AdvancedDashboard from "./AdvancedDashboard";
 
 function App() {
   const [activeView, setActiveView] = useState('Dashboard'); // Track active view
@@ -13,8 +14,8 @@ function App() {
     switch (activeView) {
       case 'Dashboard':
         return <ProjectDashboard />;
-      case 'BudgetStatus':
-        return <BudgetStatus />;
+      case 'Insights':
+        return <AdvancedDashboard/>
       case 'Projects':
         return <ProjectTable />;
       default:

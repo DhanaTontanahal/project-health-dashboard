@@ -1,10 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { ref, get } from "firebase/database"; // Import Firebase functions
 import { database } from './firebase'; // Import Firebase config
-import ProjectAnalysis from './components/ProjectAnalysis';
+import ProjectHealthScore from './components/ProjectHealthScore';
+import { transformToHealthIndexData } from './utils/datatransform';
+import styled from 'styled-components'
+import BurnoutRiskHeatmap from "./components/BurnoutRiskHeatmap"
+
+const Card = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
 
 
-function TestDashboard() {
+// Styled components for the layout
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+`;
+
+
+function AdvancedDashboard() {
   const [projectData, setProjectData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,12 +58,17 @@ function TestDashboard() {
 
   return (
     <div className="App">
-      {/* Pass the fetched project data to ProjectAnalysis component */}
-      <ProjectAnalysis projects={projectData} />
-      
+      <Container>
+        <Card>
+          <ProjectHealthScore projects={transformToHealthIndexData(projectData)} />
+        </Card>
+        <Card>
+          <BurnoutRiskHeatmap projects={transformToHealthIndexData(projectData)} />
+        </Card>
+      </Container>
 
     </div>
   );
 }
 
-export default TestDashboard;
+export default AdvancedDashboard;
